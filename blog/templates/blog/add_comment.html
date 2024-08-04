@@ -1,0 +1,11 @@
+<!-- blog/templates/blog/add_comment.html -->
+{% extends "blog/base_generic.html" %}
+
+{% block content %}
+<h2>Add Comment</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Comment</button>
+</form>
+{% endblock %}
