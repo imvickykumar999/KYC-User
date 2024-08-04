@@ -1,2 +1,3 @@
 # KYC-User
-i want to create blog website in django, where 2 types of accounts, first is kyc who can upload blog and second type of user after login can comment and like blog
+
+![image](https://github.com/user-attachments/assets/a5d5bf45-8a85-4073-b0de-ff5d5962f7b1)
