@@ -1,0 +1,14 @@
+<!-- blog/templates/blog/home.html -->
+{% extends "blog/base_generic.html" %}
+
+{% block content %}
+<h2>All Posts</h2>
+<ul>
+    {% for post in posts %}
+        <li>
+            <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+            by {{ post.author.username }}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
