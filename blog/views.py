@@ -25,7 +25,7 @@ def index(request):
 @login_required
 def create_post(request):
     if not request.user.profile.is_kyc_user:
-        return redirect('home')
+        return redirect('profile')
     
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
