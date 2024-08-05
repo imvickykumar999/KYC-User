@@ -2,13 +2,65 @@
 {% extends "blog/base_generic.html" %}
 
 {% block content %}
-<h2>All Posts</h2>
-<ul>
-    {% for post in posts %}
-        <li>
-            <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
-            by {{ post.author.username }}
-        </li>
-    {% endfor %}
-</ul>
+<h2 class="posts-title">All Posts</h2>
+
+<div class="posts-container">
+    <table class="posts-table">
+        {% for post in posts %}
+        <tr>
+            <td class="post-title"><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></td>
+            <td class="post-author">by {{ post.author.username }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><hr class="post-divider"></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<style>
+.posts-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.posts-title {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.posts-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.posts-table tr {
+    margin-bottom: 10px;
+}
+
+.post-title {
+    font-weight: bold;
+    padding: 10px;
+    width: 70%;
+    text-align: left;
+}
+
+.post-author {
+    font-style: italic;
+    text-align: right;
+    width: 30%;
+    padding: 10px;
+}
+
+.post-divider {
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+</style>
 {% endblock %}

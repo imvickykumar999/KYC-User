@@ -2,27 +2,152 @@
 {% extends "blog/base_generic.html" %}
 
 {% block content %}
-<h2>{{ post.title }}</h2>
+<div class="post-detail-container">
+    <h2 class="post-title">{{ post.title }}</h2>
 
-{% if post.image %}
-    <img src="{{ post.image.url }}" alt="{{ post.title }}">
-{% endif %}
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+    {% endif %}
 
-<p>{{ post.content }}</p>
-<p>By {{ post.author.username }}</p>
+    <p class="post-content">{{ post.content|safe }}</p>
+    <p class="post-author">By {{ post.author.username }}</p>
 
-<h3>Comments</h3>
-<ul>
-    {% for comment in post.comments.all %}
-        <li>{{ comment.content }} - {{ comment.user.username }}</li>
-    {% endfor %}
-</ul>
+    <h3 class="comments-title">Comments</h3>
+    <ul class="comments-list">
+        {% for comment in post.comments.all %}
+            <li class="comment-item">
+                <div class="comment-content">{{ comment.content }}</div>
+                <div class="comment-author">- {{ comment.user.username }}</div>
+            </li>
+        {% endfor %}
+    </ul>
 
-<h3>Likes and Dislikes</h3>
-<p>Likes: {{ likes_count }}</p>
-<p>Dislikes: {{ dislikes_count }}</p>
+    <h3 class="likes-dislikes-title">Likes and Dislikes</h3>
+    <div class="likes-dislikes-container">
+        <span class="likes-count">Likes: {{ likes_count }}</span>
+        <a href="{% url 'like_post' post.pk %}" class="icon-link"><i class="fa fa-thumbs-up"></i></a>
+        <span class="dislikes-count">Dislikes: {{ dislikes_count }}</span>
+        <a href="{% url 'dislike_post' post.pk %}" class="icon-link"><i class="fa fa-thumbs-down"></i></a>
+    </div>
 
-<a href="{% url 'add_comment' post.pk %}">Add Comment</a>
-<a href="{% url 'like_post' post.pk %}">Like</a>
-<a href="{% url 'dislike_post' post.pk %}">Dislike</a>
+    <div class="actions">
+        <a href="{% url 'add_comment' post.pk %}" class="action-link">Add Comment</a>
+    </div>
+</div>
+
+<style>
+.post-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.post-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+.post-content {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin: 20px 0;
+}
+
+.post-author {
+    font-style: italic;
+    text-align: right;
+    margin-bottom: 40px;
+}
+
+.comments-title,
+.likes-dislikes-title {
+    font-size: 1.5em;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.comments-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 40px;
+}
+
+.comment-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.comment-content {
+    font-size: 1.1em;
+}
+
+.comment-author {
+    font-weight: bold;
+    font-style: italic;
+    text-align: right;
+}
+
+.likes-dislikes-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.likes-count,
+.dislikes-count {
+    font-size: 1.2em;
+    margin: 0 10px;
+}
+
+.icon-link {
+    font-size: 1.5em;
+    color: #007bff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.icon-link:hover {
+    color: #0056b3;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.action-link {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.action-link:hover {
+    background-color: #0056b3;
+}
+</style>
+<!-- Load FontAwesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}

@@ -2,9 +2,69 @@
 {% extends "blog/base_generic.html" %}
 
 {% block content %}
-<h2>Welcome to the Blog</h2>
-<ul>
-    <li><a href="{% url 'home' %}">Blogs</a></li>
-    <li><a href="{% url 'create_post' %}">Create Post</a></li>
-</ul>
+<h2 class="index-title">Welcome to the Blog</h2>
+
+<div class="index-container">
+    <table class="index-table">
+        <tr>
+            <td class="index-item"><strong>Blogs</strong></td>
+            <td class="index-link"><a href="{% url 'home' %}">View</a></td>
+        </tr>
+        <tr>
+            <td class="index-item"><strong>Create Post</strong></td>
+            <td class="index-link"><a href="{% url 'create_post' %}">View</a></td>
+        </tr>
+    </table>
+</div>
+
+<style>
+.index-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.index-title {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.index-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.index-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.index-item {
+    font-size: 1.2em;
+    color: #333;
+    width: 70%;
+    text-align: left;
+}
+
+.index-link {
+    text-align: right;
+    width: 30%;
+}
+
+.index-link a {
+    font-size: 1.2em;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.index-link a:hover {
+    text-decoration: underline;
+}
+</style>
 {% endblock %}

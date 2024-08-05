@@ -2,7 +2,66 @@
 {% extends "blog/base_generic.html" %}
 
 {% block content %}
-<h2>Profile</h2>
-<p>Username: {{ user.username }}</p>
-<p>Email: {{ user.email }}</p>
+<h2 class="profile-title">Profile</h2>
+
+<div class="profile-container">
+    <table class="profile-table">
+        <tr>
+            <td class="profile-label"><strong>Username:</strong></td>
+            <td class="profile-value">{{ user.username }}</td>
+        </tr>
+        {% if user.email %}
+        <tr>
+            <td class="profile-label"><strong>Email:</strong></td>
+            <td class="profile-value">{{ user.email }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td class="profile-label"><strong>KYC User:</strong></td>
+            <td class="profile-value">No ( You can not Create Post )</td>
+        </tr>
+        {% endif %}
+    </table>
+</div>
+
+<style>
+.profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-title {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.profile-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.profile-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-label {
+    font-weight: bold;
+    text-align: right;
+    color: #555;
+    width: 30%;
+}
+
+.profile-value {
+    text-align: left;
+    color: #000;
+    width: 70%;
+}
+</style>
 {% endblock %}
