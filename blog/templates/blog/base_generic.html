@@ -114,7 +114,7 @@
             <ul>
                 <li><a href="{% url 'index' %}">Home</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                    <li><a href="{% url 'profile' %}">@{{user.username}}</a></li>
                     <li>
                         <form id="logout-form" method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
