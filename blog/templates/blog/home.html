@@ -79,5 +79,36 @@
     border: 0;
     border-top: 1px solid #ddd;
 }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .posts-container {
+        padding: 10px;
+    }
+    .posts-title {
+        font-size: 1.5em;
+    }
+    .posts-table tr {
+        display: block;
+        margin-bottom: 15px;
+    }
+    .posts-table td {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 8px 0;
+    }
+    .post-title {
+        width: 100%;
+    }
+    .post-author {
+        width: 100%;
+        text-align: left;
+    }
+    .post-edit, .post-delete {
+        width: 100%;
+        text-align: left;
+    }
+}
 </style>
 {% endblock %}

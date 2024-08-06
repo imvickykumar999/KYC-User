@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>{% block title %}Vicks Blog{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -21,6 +23,13 @@
         h1 {
             margin: 0;
         }
+        .header-link {
+            color: #fff;
+            text-decoration: none; /* Remove underline */
+        }
+        nav {
+            position: relative;
+        }
         nav ul {
             list-style: none;
             padding: 0;
@@ -30,6 +39,7 @@
         }
         nav ul li {
             margin-right: 1.5rem;
+            position: relative;
         }
         nav ul li a, nav ul li button {
             color: #fff;
@@ -38,6 +48,8 @@
             border: none;
             cursor: pointer;
             font-size: 1rem;
+            display: block;
+            padding: 1rem 2rem;
         }
         nav ul li button {
             padding: 0;
@@ -45,11 +57,21 @@
         nav ul li button:hover, nav ul li a:hover {
             text-decoration: underline;
         }
-        main {
-            padding: 2rem;
+        .navbar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
         }
-        form {
-            display: inline;
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 4px 0;
         }
         .logout-btn {
             color: #fff;
@@ -81,38 +103,46 @@
         .link:hover {
             text-decoration: underline;
         }
-        .navbar {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
 
-        /* Additional CSS for index.html */
-        .content h2 {
-            font-size: 2rem;
-            color: #343a40;
-        }
-        .content ul {
-            padding-left: 1.5rem;
-        }
-        .content ul li {
-            margin-bottom: 0.5rem;
-        }
-        .content ul li a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .content ul li a:hover {
-            text-decoration: underline;
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .navbar ul {
+                flex-direction: column;
+                width: 250px;
+                height: 100%;
+                background-color: #343a40;
+                position: fixed;
+                top: 0;
+                left: -250px;
+                transition: left 0.3s ease;
+                z-index: 1;
+            }
+            .navbar ul.show {
+                left: 0;
+            }
+            .navbar ul li {
+                margin: 0;
+                padding: 1rem 0;
+                width: 100%;
+            }
+            .menu-toggle {
+                display: flex;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Vicks Blog</h1>
+        <a href="{% url 'index' %}" class="header-link"><h1>Vicks Blog</h1></a>
         <nav class="navbar">
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <ul>
                 <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'home' %}">Blogs</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'profile' %}">@{{user.username}}</a></li>
                     <li>
@@ -134,5 +164,12 @@
             {% endblock %}
         </div>
     </main>
+
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            const nav = document.querySelector('.navbar ul');
+            nav.classList.toggle('show');
+        });
+    </script>
 </body>
 </html>
