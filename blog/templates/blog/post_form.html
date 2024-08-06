@@ -1,14 +1,25 @@
-<!-- blog/templates/blog/post_form.html -->
 {% extends "blog/base_generic.html" %}
 
 {% block content %}
-<h2 class="post-form-title">New Post</h2>
+<h2 class="post-form-title">
+    {% if form.instance.pk %}
+        Edit Post
+    {% else %}
+        New Post
+    {% endif %}
+</h2>
 
 <div class="post-form-container">
     <form method="post" enctype="multipart/form-data" class="post-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="submit-button">Save</button>
+        <button type="submit" class="submit-button">
+            {% if form.instance.pk %}
+                Update
+            {% else %}
+                Save
+            {% endif %}
+        </button>
     </form>
 </div>
 

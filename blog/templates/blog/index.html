@@ -2,16 +2,20 @@
 
 {% block content %}
 <h2 class="index-title">Welcome to the Blog</h2>
-
+<br>
+<div class="image-container">
+    <img src="https://img.freepik.com/free-photo/makeup-brush-eyeglasses-cactus-plant-white-flower-bouquet-with-laptop-blue-background_23-2148178672.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1722816000&semt=ais_hybrid" alt="Blog Welcome Image" class="welcome-image">
+</div>
+<br>
 <div class="index-container">
     <table class="index-table">
         <tr>
-            <td class="index-item"><strong>Blogs</strong></td>
+            <td class="index-item"><strong>All Blogs</strong></td>
             <td class="index-link"><a href="{% url 'home' %}">View</a></td>
         </tr>
         <tr>
-            <td class="index-item"><strong>Create Post</strong></td>
-            <td class="index-link"><a href="{% url 'create_post' %}">View</a></td>
+            <td class="index-item"><strong>Create Blog</strong></td>
+            <td class="index-link"><a href="{% url 'create_post' %}">Post</a></td>
         </tr>
     </table>
 </div>
@@ -31,6 +35,17 @@
     font-size: 2em;
     margin-bottom: 20px;
     color: #333;
+}
+
+.image-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.welcome-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
 .index-table {

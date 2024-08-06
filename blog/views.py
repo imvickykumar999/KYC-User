@@ -12,6 +12,21 @@ class SignUp(generic.CreateView):
     template_name = 'registration/signup.html'
 
 @login_required
+def update_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.user != post.author:
+        return redirect('post_detail', pk=post.pk)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/post_form.html', {'form': form})
+
+@login_required
 def profile(request):
     return render(request, 'blog/profile.html', {'user': request.user})
 
@@ -72,3 +87,10 @@ def post_detail(request, pk):
         'dislikes_count': dislikes_count,
     }
     return render(request, 'blog/post_detail.html', context)
+
+@login_required
+def delete_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.user == post.author:
+        post.delete()
+    return redirect('home')

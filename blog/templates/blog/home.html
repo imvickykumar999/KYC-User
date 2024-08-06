@@ -1,4 +1,3 @@
-<!-- blog/templates/blog/home.html -->
 {% extends "blog/base_generic.html" %}
 
 {% block content %}
@@ -10,9 +9,17 @@
         <tr>
             <td class="post-title"><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></td>
             <td class="post-author">by {{ post.author.username }}</td>
+            <td class="post-edit">
+                {% if request.user == post.author %}
+                <a href="{% url 'update_post' post.pk %}">Edit</a>
+                </td>
+            <td class="post-delete">
+                <a href="{% url 'delete_post' post.pk %}" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+                {% endif %}
+            </td>
         </tr>
         <tr>
-            <td colspan="2"><hr class="post-divider"></td>
+            <td colspan="4"><hr class="post-divider"></td>
         </tr>
         {% endfor %}
     </table>
@@ -47,7 +54,7 @@
 .post-title {
     font-weight: bold;
     padding: 10px;
-    width: 70%;
+    width: 50%;
     text-align: left;
 }
 
@@ -56,6 +63,16 @@
     text-align: right;
     width: 30%;
     padding: 10px;
+}
+
+.post-edit, .post-delete {
+    text-align: center;
+    width: 10%;
+    padding: 10px;
+}
+
+.post-delete {
+    color: red;
 }
 
 .post-divider {
