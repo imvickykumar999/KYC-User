@@ -1,4 +1,5 @@
-># **Blog** : `Create Read Update Delete` *Like Comment Share*
+># `Dynamic Vicks` : [*`Blog`*](https://dynamicvicksblog.pythonanywhere.com/)
+>      Like Comment Share || Create Read Update Delete
 >
 >![image](https://github.com/user-attachments/assets/1de72c65-ac4c-4530-bbaf-92853b1d19b7)
 >![image](https://github.com/user-attachments/assets/d8c99e62-47f3-4399-ab94-39e73a6e468c)
