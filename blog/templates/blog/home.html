@@ -3,33 +3,35 @@
 {% block content %}
 <h2 class="posts-title">All Posts</h2>
 
-    {% for post in posts %}
-    <div class="post-card">
-        <div class="post-image">
-            {% if post.image %}
-            <a href="{% url 'post_detail' post.pk %}">
-                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-img">
-            </a>
+{% for post in posts %}
+<div class="post-image">
+    {% if post.image %}
+    <a href="{% url 'post_detail' post.pk %}">
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-img">
+    </a>
+    {% endif %}
+</div> <br>
+
+<div class="post-card">
+    <div class="post-content">
+        <h3 class="post-title">
+            <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+        </h3>
+        <p class="post-author">author: {{ post.author.username }}</p> <br>
+        <div class="post-actions">
+            {% if request.user == post.author %}
+            <a href="{% url 'update_post' post.pk %}" class="post-edit">Edit</a>
+            <a href="{% url 'delete_post' post.pk %}" class="post-delete" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
             {% endif %}
         </div>
-        <div class="post-content">
-            <h3 class="post-title">
-                <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
-            </h3>
-            <p class="post-author">author: {{ post.author.username }}</p> <br>
-            <div class="post-actions">
-                {% if request.user == post.author %}
-                <a href="{% url 'update_post' post.pk %}" class="post-edit">Edit</a>
-                <a href="{% url 'delete_post' post.pk %}" class="post-delete" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
-                {% endif %}
-            </div>
-        </div>
     </div>
-    <hr class="post-divider">
-    {% endfor %}
+</div>
+
+<hr class="post-divider">
+<br>
+{% endfor %}
 
 <style>
-
 .posts-title {
     text-align: center;
     font-size: 2em;
@@ -57,7 +59,9 @@
     width: 100%;
     height: auto;
     object-fit: cover;
+    border-radius: 8px; /* Curve the edges of the image */
     display: block;
+    margin: 0 auto; /* Center-align the image */
 }
 
 .post-content {
