@@ -1,4 +1,3 @@
-<!-- blog/templates/blog/post_detail.html -->
 {% extends "blog/base_generic.html" %}
 
 {% block content %}
@@ -10,14 +9,14 @@
     {% endif %}
 
     <p class="post-content">{{ post.content|safe }}</p>
-    <p class="post-author">By {{ post.author.username }}</p>
+    <p class="post-author">author : @{{ post.author.username }}</p>
 
     <h3 class="comments-title">Comments</h3>
     <ul class="comments-list">
         {% for comment in post.comments.all %}
             <li class="comment-item">
                 <div class="comment-content">{{ comment.content }}</div>
-                <div class="comment-author">- {{ comment.user.username }}</div>
+                <div class="comment-author">@{{ comment.user.username }}</div>
             </li>
         {% endfor %}
     </ul>
@@ -25,9 +24,9 @@
     <h3 class="likes-dislikes-title">Likes and Dislikes</h3>
     <div class="likes-dislikes-container">
         <span class="likes-count">Likes: {{ likes_count }}</span>
-        <a href="{% url 'like_post' post.pk %}" class="icon-link"><i class="fa fa-thumbs-up"></i></a>
+        <a href="{% url 'like_post' post.pk %}" class="icon-link thumbs-up"><i class="fa fa-thumbs-up"></i></a>
         <span class="dislikes-count">Dislikes: {{ dislikes_count }}</span>
-        <a href="{% url 'dislike_post' post.pk %}" class="icon-link"><i class="fa fa-thumbs-down"></i></a>
+        <a href="{% url 'dislike_post' post.pk %}" class="icon-link thumbs-down"><i class="fa fa-thumbs-down"></i></a>
     </div>
 
     <div class="actions">
@@ -57,6 +56,7 @@
     height: auto;
     display: block;
     margin: 20px auto;
+    border-radius: 12px; /* Adjust the value as needed for the curvature */
 }
 
 .post-content {
@@ -90,7 +90,7 @@
     background-color: #fff;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 12px; /* Adjust the value as needed for the curvature */
     margin-bottom: 10px;
 }
 
@@ -99,7 +99,6 @@
 }
 
 .comment-author {
-    font-weight: bold;
     font-style: italic;
     text-align: right;
 }
@@ -120,13 +119,20 @@
 
 .icon-link {
     font-size: 1.5em;
-    color: #007bff;
     text-decoration: none;
     padding: 10px;
 }
 
+.thumbs-up {
+    color: green; /* Thumbs up color */
+}
+
+.thumbs-down {
+    color: red; /* Thumbs down color */
+}
+
 .icon-link:hover {
-    color: #0056b3;
+    opacity: 0.8;
 }
 
 .actions {
@@ -148,6 +154,7 @@
     background-color: #0056b3;
 }
 </style>
+
 <!-- Load FontAwesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}

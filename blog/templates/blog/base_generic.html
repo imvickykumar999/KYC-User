@@ -54,8 +54,8 @@
         nav ul li button {
             padding: 0;
         }
-        nav ul li button:hover, nav ul li a:hover {
-            text-decoration: underline;
+        nav ul li a:hover, nav ul li button:hover {
+            text-decoration: none; /* Ensure no underline on hover */
         }
         .navbar {
             display: flex;
@@ -82,9 +82,6 @@
             font-size: 1rem;
             margin-left: 1.5rem;
         }
-        .logout-btn:hover {
-            background-color: #0056b3;
-        }
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -101,7 +98,7 @@
             text-decoration: none;
         }
         .link:hover {
-            text-decoration: underline;
+            text-decoration: none; /* Ensure no underline on hover */
         }
 
         /* Responsive styles */

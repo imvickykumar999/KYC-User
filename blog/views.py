@@ -31,7 +31,7 @@ def profile(request):
     return render(request, 'blog/profile.html', {'user': request.user})
 
 def home(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-created_at')  # Order by newest first
     return render(request, 'blog/home.html', {'posts': posts})
 
 def index(request):
